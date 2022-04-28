@@ -6,6 +6,7 @@
 const ModPlayer = {
     context: null,
     mixerNode: null,
+    workletNode: null,
     module: null,
     buffer: null,
     mixingRate: 44100,
@@ -17,6 +18,29 @@ const ModPlayer = {
         this.audioWorkletSupport = !!AudioWorkletNode.toString().match(/native code/);
         this.channels = [true, true, true, true];
         return this.createContext();
+    },
+
+    loadFileBuffer(file) {
+        if (!this.ready) {
+            return;
+        } else {
+            this.ready = false;
+        }
+        this.loaded = false;
+        this.wasPlaying = this.playing;
+        if(!this.context) {
+            console.log('Create context');
+            this.createContext();
+        }
+        this.pause();
+        let fileReader = new FileReader();
+        fileReader.onload = () => {
+            this.postMessage({
+                message: 'loadModule',
+                buffer: fileReader.result
+            });
+            };
+        fileReader.readAsArrayBuffer(file);
     },
 
     async loadModule(url) {
@@ -57,7 +81,7 @@ const ModPlayer = {
 
         const soundProcessor = 'modplayer-processor.js';
 
-        return this.context.audioWorklet.addModule(`/lib/player/${soundProcessor}`).then(() => {
+        return this.context.audioWorklet.addModule(`/js/${soundProcessor}`).then(() => {
             const numAnalysers = this.audioWorkletSupport && 4 || 2;
 
             // apply a filter

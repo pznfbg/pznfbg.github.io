@@ -8,20 +8,42 @@
 	<style>
 		@font-face {
 			font-family	: 'protracker';
-			src			: url('pt2-3dfont.ttf');
+			src			: url('res/pt2-3dfont.ttf');
 			font-weight	: normal;
 			font-style	: normal;
 		}
-		.fontTest {
-			border			: 1px solid black;
-			font-family		: 'protracker';
-			font-size		: 8px;
+		input[type="file"] {
+			display: none;
 		}
 	</style>
 </head>
 <body>
-	<div class="fontTest">
-		THIS IS A TEST OF THE PROTRCKER FONT
-	</div>
+	<button id="loadButton">Load</button>
+	<input type="file" id="fileSelector" accept=".mod" onchange="playModule(this.files[0])">
 </body>
+<script src="js/modplayer.js"></script>
+<script src="js/util.js"></script>
+
+
+<script>
+	const fileSelect = document.getElementById('fileSelector');
+	const fileButton = document.getElementById('loadButton');
+	fileButton.addEventListener('click', () => {
+		fileSelect.click();
+	});
+	document.addEventListener('moduleLoaded', () => {
+		ModPlayer.play();
+	});
+	const playModule = async (file) => {
+		await ModPlayer.init();
+		ModPlayer.loadFileBuffer(file);
+		
+	}
+
+
+
+</script>
+
+
+
 </html>
