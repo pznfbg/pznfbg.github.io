@@ -1,0 +1,31 @@
+#preview {
+	height: 200px;
+	border: 1px solid black;
+	border-radius: 2px;
+	background-repeat: no-repeat;
+	background-position: center; 
+}
+
+input[type=text], textarea {
+	outline: none;
+}
+
+
+#svgForm {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	& .formRow {
+		display: flex;
+		flex-direction: row;
+		gap: inherit;
+		& :first-child {
+			flex: 1 1 auto;
+		}
+	} 
+	& .formButton {
+		width: 9ch;
+	}
+}
+
+
