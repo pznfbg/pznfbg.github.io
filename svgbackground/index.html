@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>SVG image-background</title>
+	<link rel="stylesheet" href="svgbackground.css">
+</head>
+<body>
+	<div id="svgForm">
+		<div class="formRow">
+			<select id="svgExample">
+				<option value="-1"></option>
+			</select>
+		</div>
+		<div class="formRow">
+			<textarea id="svgSource" cols="60" rows="10"></textarea>
+		</div>
+		<div class="formRow">
+			<input type="text" id="svgFill" value="#000000" style="flex 1 1 auto;"/>
+			<input class="formButton" type="color" id="selectColor" value="#000000"/>
+		</div>
+		<div class="formRow">
+			<input type="text" id="result" readonly value="" style="flex: 1 1;"/>
+			<button class="formButton" id="copyToClipboard">Copy</button>
+		</div>
+		<div id="preview"></div>
+	</div>
+	<script type="module" src="svgbackground.js"></script>
+</body>
+
+</html>
